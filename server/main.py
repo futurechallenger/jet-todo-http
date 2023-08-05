@@ -11,9 +11,19 @@ data = [
 ]
 
 
-@app.get("/")
-def read_root():
-    return data
+@app.get("/items/{status}/status")
+def read_items(status: str):
+    if status == "all":
+        return data
+
+    if status == "initial":
+        ret = []
+        for d in data:
+            if d["status"] == 0:
+                ret.append(d)
+        return ret
+
+    return []
 
 
 @app.get("/items/{item_id}")

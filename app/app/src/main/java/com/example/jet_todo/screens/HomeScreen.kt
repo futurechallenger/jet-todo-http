@@ -1,9 +1,6 @@
 package com.example.jet_todo.screens
 
 import android.util.Log
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.MutableTransitionState
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -17,10 +14,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.CurrencyExchange
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Done
-import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -29,8 +24,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,17 +34,12 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.jet_todo.R
-import com.example.jet_todo.TodoSelector
-import com.example.jet_todo.model.TodoItem
-import com.example.jet_todo.viewmodel.SettingsViewModel
 import com.example.jet_todo.viewmodel.TodoViewModel
 
 
@@ -160,7 +148,7 @@ fun HomeScreen(
 
                                     IconButton(
                                         onClick = {
-                                            todoViewModel.markAsDone(it)
+//                                            todoViewModel.markAsDone(it)
                                         }) {
                                         Icon(
                                             Icons.Rounded.Done,
@@ -169,7 +157,7 @@ fun HomeScreen(
                                     }
 
                                     IconButton(
-                                        onClick = { todoViewModel.delete(it) }) {
+                                        onClick = { /*todoViewModel.delete(it)*/ }) {
                                         Icon(
                                             Icons.Rounded.Delete,
                                             contentDescription = stringResource(id = R.string.delete)

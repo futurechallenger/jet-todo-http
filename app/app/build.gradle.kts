@@ -80,10 +80,13 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
 
     // Preferences DataStore
-
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material-icons-extended:1.4.3")
     implementation("androidx.compose.material:material:1.4.3")
+
+    // retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.5.0")
 }
