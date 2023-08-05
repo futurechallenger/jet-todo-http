@@ -8,10 +8,10 @@ import com.example.jet_todo.model.ConfigOption
 import com.example.jet_todo.repositories.SortBy
 import com.example.jet_todo.repositories.TodoRepository
 import com.example.jet_todo.repositories.UserPreferencesRepository
-import com.example.jettodo.data.ConfigOption
-import com.example.jettodo.data.SortBy
-import com.example.jettodo.data.TodoRepository
-import com.example.jettodo.data.UserPreferencesRepository
+//import com.example.jettodo.data.ConfigOption
+//import com.example.jettodo.data.SortBy
+//import com.example.jettodo.data.TodoRepository
+//import com.example.jettodo.data.UserPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
@@ -83,7 +83,7 @@ class SettingsViewModel @Inject constructor(
 
     fun deleteAll() {
         viewModelScope.launch {
-            repository.deleteAll()
+//            repository.deleteAll()
         }
     }
 }

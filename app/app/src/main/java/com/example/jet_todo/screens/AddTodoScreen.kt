@@ -65,7 +65,7 @@ fun AddTodoScreen(
                     onClick = {
                         navController?.popBackStack()
                         // TODO: Error handling here
-                        todoViewModel.addTodo(title = textContent.value, desc = description.value)
+//                        todoViewModel.addTodo(title = textContent.value, desc = description.value)
                     },
                 ) {
                     Text(text = stringResource(id = R.string.ok))

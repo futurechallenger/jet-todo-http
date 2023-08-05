@@ -12,6 +12,6 @@ data class TodoItem(
     @field:SerializedName("description")
     val description: String? = null,
 
-    @field:SerializedName("completed")
-    val completed: Boolean = false
+    @field:SerializedName("status")
+    val status: Int?
 )

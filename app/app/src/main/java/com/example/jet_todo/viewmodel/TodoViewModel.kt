@@ -33,13 +33,12 @@ class TodoViewModel @Inject constructor(
     val todoListState: State<List<TodoItem>> = _todoListState
     val preAddTodo: State<TodoItem?> = _preAddTodo
 
-    val alarmManager = appContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
     fun getAllTodoItems(orderBy: Int) {
-        val sortByField = fromSortBy(SortBy.findByValue(orderBy))
         viewModelScope.launch {
-            repository.getAllTodoItems(sortByField).collect() {
-                _todoListState.value = it
+            try {
+                _todoListState.value = repository.getAllTodoItems()
+            } catch (e: Exception) {
+                // TODO: Error handling
             }
         }
     }
@@ -50,17 +49,18 @@ class TodoViewModel @Inject constructor(
     }
 
     fun getInitialTodoItems(orderBy: Int) {
-        val sortByField = fromSortBy(SortBy.findByValue(orderBy))
         viewModelScope.launch {
-            repository.getInitialTodoItems(sortByField).collect() {
-                _todoListState.value = it
+            try {
+                _todoListState.value = repository.getInitialTodoItems()
+            } catch (e: Exception) {
+                // TODO: error handling
             }
         }
     }
 
     fun preAddTodo() {
         if (_todoListState.value.isNullOrEmpty() && _preAddTodo.value == null) {
-            val placeholder = TodoItem(-1, "", "", 0, createdAt = null, updatedAt = null)
+            val placeholder = TodoItem(-1, "", "", 0)
             _preAddTodo.value = placeholder
             _todoListState.value = listOf(placeholder)
         } else {
@@ -70,57 +70,47 @@ class TodoViewModel @Inject constructor(
         }
     }
 
-    fun addTodo(title: String, desc: String) {
-        viewModelScope.launch {
-            repository.insert(
-                TodoItem(
-                    id = 0,
-                    title = title,
-                    description = desc,
-                    status = TodoItemStatus.INIT.status,
-                    createdAt = Date(),
-                    updatedAt = null
-                )
-            )
-        }
-    }
+//    fun addTodo(title: String, desc: String) {
+//        viewModelScope.launch {
+//            repository.insert(
+//                TodoItem(
+//                    id = 0,
+//                    title = title,
+//                    description = desc,
+//                    status = TodoItemStatus.INIT.status,
+//                    createdAt = Date(),
+//                    updatedAt = null
+//                )
+//            )
+//        }
+//    }
 
-    fun markAsDone(todoItem: TodoItem) {
-        viewModelScope.launch {
-            todoItem.status = TodoItemStatus.COMPLETED.status
-            todoItem.updatedAt = Date()
-            repository.update(todoItem)
-        }
-    }
-
-    fun delete(todoItem: TodoItem) {
-        viewModelScope.launch {
-            todoItem.status = TodoItemStatus.DELETED.status
-            todoItem.updatedAt = Date()
-            repository.update(todoItem)
-        }
-    }
-
-    private fun fromSortBy(sortBy: SortBy?): String {
-        if (sortBy == null) return "title"
-
-        val ret = when (sortBy) {
-            SortBy.BY_TITLE -> "title"
-            SortBy.BY_UPDATED_DATE -> "updated_at"
-            SortBy.BY_CREATED_DATE -> "created_at"
-            else -> "title"
-        }
-
-        return ret
-    }
-
-    suspend fun test1(): Int {
-        val handler = CoroutineExceptionHandler { _, exception ->
-            Log.d("TODOViewModel", "$exception handler!")
-        }
-
-        return withContext(Dispatchers.Default + handler) {
-            return@withContext 111
-        }
-    }
+//    fun markAsDone(todoItem: TodoItem) {
+//        viewModelScope.launch {
+//            todoItem.status = TodoItemStatus.COMPLETED.status
+//            todoItem.updatedAt = Date()
+//            repository.update(todoItem)
+//        }
+//    }
+//
+//    fun delete(todoItem: TodoItem) {
+//        viewModelScope.launch {
+//            todoItem.status = TodoItemStatus.DELETED.status
+//            todoItem.updatedAt = Date()
+//            repository.update(todoItem)
+//        }
+//    }
+//
+//    private fun fromSortBy(sortBy: SortBy?): String {
+//        if (sortBy == null) return "title"
+//
+//        val ret = when (sortBy) {
+//            SortBy.BY_TITLE -> "title"
+//            SortBy.BY_UPDATED_DATE -> "updated_at"
+//            SortBy.BY_CREATED_DATE -> "created_at"
+//            else -> "title"
+//        }
+//
+//        return ret
+//    }
 }
