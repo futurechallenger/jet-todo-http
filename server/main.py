@@ -5,9 +5,9 @@ from fastapi import FastAPI
 app = FastAPI()
 
 data = [
-    {"id": 1, "title": "todo 1", "description": "todo 1 desc", "status": 1},
-    {"id": 1, "title": "todo 1", "description": "todo 1 desc", "status": 1},
-    {"id": 1, "title": "todo 1", "description": "todo 1 desc", "status": 1},
+    {"id": 1, "title": "todo 1", "description": "todo 1 desc", "status": 0},
+    {"id": 2, "title": "todo 2", "description": "todo 2 desc", "status": 0},
+    {"id": 3, "title": "todo 3", "description": "todo 3 desc", "status": 0},
 ]
 
 
