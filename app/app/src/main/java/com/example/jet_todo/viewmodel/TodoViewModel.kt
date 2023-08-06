@@ -39,6 +39,7 @@ class TodoViewModel @Inject constructor(
                 _todoListState.value = repository.getAllTodoItems()
             } catch (e: Exception) {
                 // TODO: Error handling
+                Log.e("TodoViewModel", "error: $e")
             }
         }
     }
@@ -54,6 +55,7 @@ class TodoViewModel @Inject constructor(
                 _todoListState.value = repository.getInitialTodoItems()
             } catch (e: Exception) {
                 // TODO: error handling
+                Log.e("TodoViewModel", "error: $e")
             }
         }
     }
