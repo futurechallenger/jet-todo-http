@@ -33,7 +33,7 @@ class ApplicationModule {
 //    }
 
     @Provides
-    fun provideRetrofit(): TodoApi {
+    fun providesTodoApi(): TodoApi {
         return RetrofitInstance.todoApi
     }
 }

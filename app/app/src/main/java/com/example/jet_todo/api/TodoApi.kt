@@ -8,10 +8,10 @@ import retrofit2.http.Path
 
 interface TodoApi {
     @Headers("Accept: application/json")
-    @GET("/items/{status}/status")
-    abstract fun getItemsByStatus(@Path("status") status: String): List<TodoItem>
+    @GET("items/{status}/status")
+    suspend fun getItemsByStatus(@Path("status") status: String): List<TodoItem>
 
     @Headers("Accept: application/json")
-    @GET("/items/{itemId}")
-    abstract fun getItem(@Path("itemId") itemId: String): TodoItem?
+    @GET("items/{itemId}")
+    suspend fun getItem(@Path("itemId") itemId: String): TodoItem?
 }

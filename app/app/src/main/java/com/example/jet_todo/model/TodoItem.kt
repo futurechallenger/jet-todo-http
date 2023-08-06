@@ -3,15 +3,15 @@ package com.example.jet_todo.model
 import com.google.gson.annotations.SerializedName
 
 data class TodoItem(
-    @field:SerializedName("id")
-    val id: Int? = null,
+//    @field:SerializedName("id")
+    var id: Int? = null,
 
-    @field:SerializedName("title")
-    val title: String? = null,
+//    @field:SerializedName("title")
+    var title: String? = null,
 
-    @field:SerializedName("description")
-    val description: String? = null,
+//    @field:SerializedName("description")
+    var description: String? = null,
 
-    @field:SerializedName("status")
-    val status: Int?
+//    @field:SerializedName("status")
+    var status: Int?
 )
