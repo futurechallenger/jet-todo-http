@@ -17,20 +17,6 @@ import retrofit2.Retrofit
 @Module
 @InstallIn(SingletonComponent::class)
 class ApplicationModule {
-//    @Provides
-//    fun provideRoomDB(@ApplicationContext context: Context): TodoDatabase {
-//        return TodoDatabase.getInstance(context)
-//    }
-
-//    @Provides
-//    fun provideTodoDao(db: TodoDatabase): TodoDao {
-//        return db.todoDao
-//    }
-
-//    @Provides
-//    fun provideRepository(todoDao: TodoDao): TodoRepository {
-//        return TodoRepository(todoDao)
-//    }
 
     @Provides
     fun providesTodoApi(): TodoApi {

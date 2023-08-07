@@ -87,24 +87,7 @@ fun MainScreen(settingsViewModel: SettingsViewModel = hiltViewModel()) {
                     navController = navController,
                 )
             }
-            composable(route = Screens.AddTodo.route,
-//                enterTransition = {
-//                    slideIntoContainer(
-//                        AnimatedContentTransitionScope.SlideDirection.Left
-//                    )
-//                }, exitTransition = {
-//                    slideOutOfContainer(
-//                        AnimatedContentTransitionScope.SlideDirection.Right
-//                    )
-//                }, popEnterTransition = {
-//                    slideIntoContainer(
-//                        AnimatedContentTransitionScope.SlideDirection.Left
-//                    )
-//                }, popExitTransition = {
-//                    slideOutOfContainer(
-//                        AnimatedContentTransitionScope.SlideDirection.Right
-//                    )
-//                }
+            composable(route = Screens.AddTodo.route, // TODO: enter & exit transition?
             ) { AddTodoScreen(navController = navController) }
         }
     }
