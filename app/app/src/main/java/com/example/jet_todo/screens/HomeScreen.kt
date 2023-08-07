@@ -74,15 +74,7 @@ fun HomeScreen(
                 interactionSource = interactionSource, indication = null
             ) {
                 Log.d("TabBarScreens", "Box is clicked")
-//                    todoViewModel.preAddTodo()
-//                    navController.navigate(route = "AddTodo") {
-//                        popUpTo(navController.graph.findStartDestination().id) {
-//                            saveState = true
-//                        }
-//
-//                        launchSingleTop = true
-//                        restoreState = true
-//                    }
+                // Prepare adding todo items
             }
             .fillMaxSize()
         ) {
