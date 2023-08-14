@@ -2,6 +2,8 @@ from typing import Union
 
 from fastapi import FastAPI
 
+from TodoItem import TodoItem
+
 app = FastAPI()
 
 data = [
@@ -33,3 +35,22 @@ def read_item(item_id: int, q: Union[str, None] = None):
             return d
 
     return None
+
+
+@app.post("/items/add")
+def add_item(item: TodoItem):
+    data.append(item)
+    return item
+
+
+@app.post("/items/update")
+def update_item(item: TodoItem):
+    target = None
+    for el in data:
+        if item.id == el.id:
+            target = el
+
+    if target is None:
+        return None
+
+    target = item
