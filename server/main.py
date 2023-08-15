@@ -9,9 +9,9 @@ from TodoItem import TodoItem
 app = FastAPI()
 
 data = [
-    {"id": 1, "title": "todo 1", "description": "todo 1 desc", "status": 0},
-    {"id": 2, "title": "todo 2", "description": "todo 2 desc", "status": 0},
-    {"id": 3, "title": "todo 3", "description": "todo 3 desc", "status": 0},
+    TodoItem(id=1, title="todo 1", description="todo 1 desc", status=0),
+    TodoItem(id=2, title="todo 2", description="todo 2 desc", status=0),
+    TodoItem(id=3, title="todo 3", description="todo 3 desc", status=0),
 ]
 
 MAX_ID_VAL: int = 3
@@ -25,7 +25,7 @@ def read_items(status: str):
     if status == "initial":
         ret = []
         for d in data:
-            if d["status"] == 0:
+            if d.status == 0:
                 ret.append(d)
         return ret
 
@@ -56,14 +56,18 @@ def add_item(title: str, desc: str) -> TodoItem:
 @app.post("/items/update")
 def update_item(item: TodoItem):
     target = None
+    global data
+
+    tmp = []
     for el in data:
         if item.id == el.id:
-            target = el
+            tmp.append(item)
+        else:
+            tmp.append(el)
 
-    if target is None:
-        return None
+    data = tmp
 
-    target = item
+    return item
 
 
 if __name__ == "__main__":
