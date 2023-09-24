@@ -13,4 +13,8 @@ class TodoRepository @Inject constructor(private val todoApi: TodoApi) {
     suspend fun getInitialTodoItems(): List<TodoItem> {
         return todoApi.getItemsByStatus(status = "initial")
     }
+
+    suspend fun getTodoItem(todoId: Int): TodoItem? {
+        return todoApi.getItem(todoId)
+    }
 }

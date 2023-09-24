@@ -28,9 +28,11 @@ class TodoViewModel @Inject constructor(
     private val settingsRepository: UserPreferencesRepository,
 ) : ViewModel() {
     private var _todoListState = mutableStateOf<List<TodoItem>>(listOf())
+    private var _todoItemState = mutableStateOf<TodoItem?>(null)
     private var _preAddTodo = mutableStateOf<TodoItem?>(null)
 
     val todoListState: State<List<TodoItem>> = _todoListState
+    val todoState: State<TodoItem?> = _todoItemState
     val preAddTodo: State<TodoItem?> = _preAddTodo
 
     fun getAllTodoItems(orderBy: Int) {
@@ -53,6 +55,17 @@ class TodoViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 _todoListState.value = repository.getInitialTodoItems()
+            } catch (e: Exception) {
+                // TODO: error handling
+                Log.e("TodoViewModel", "error: $e")
+            }
+        }
+    }
+
+    fun getTodoItem(todoId: Int) {
+        viewModelScope.launch {
+            try {
+                _todoItemState.value = repository.getTodoItem(todoId)
             } catch (e: Exception) {
                 // TODO: error handling
                 Log.e("TodoViewModel", "error: $e")

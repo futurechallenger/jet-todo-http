@@ -13,5 +13,5 @@ interface TodoApi {
 
     @Headers("Accept: application/json")
     @GET("items/{itemId}")
-    suspend fun getItem(@Path("itemId") itemId: String): TodoItem?
+    suspend fun getItem(@Path("itemId") itemId: Int): TodoItem?
 }

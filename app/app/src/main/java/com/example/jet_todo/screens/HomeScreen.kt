@@ -48,6 +48,7 @@ import com.example.jet_todo.viewmodel.TodoViewModel
 fun HomeScreen(
     modifier: Modifier = Modifier,
     todoViewModel: TodoViewModel = hiltViewModel(),
+    outerNav: NavController,
     navController: NavController,
 ) {
     val focusRequester = remember { FocusRequester() }
@@ -63,10 +64,10 @@ fun HomeScreen(
     LaunchedEffect(sortByCode/*, TODO: isShowAll*/) {
         todoViewModel.getInitialTodoItems(sortByCode)
     }
+    val todos = todoViewModel.todoListState.value
 
     Column {
         Spacer(modifier = Modifier.height(16.dp))
-        val todos = todoViewModel.todoListState.value
 
         val interactionSource = remember { MutableInteractionSource() }
         Box(modifier = Modifier
@@ -93,7 +94,11 @@ fun HomeScreen(
                     Column {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.padding(top = 10.dp, bottom = 10.dp)
+                            modifier = Modifier
+                                .padding(top = 10.dp, bottom = 10.dp)
+                                .clickable {
+                                    outerNav.navigate("${Screens.Detail.route}/${it.id}")
+                                }
                         ) {
                             if (it.id!! == -1) {
                                 Column {
