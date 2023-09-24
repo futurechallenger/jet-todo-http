@@ -64,10 +64,10 @@ fun HomeScreen(
     LaunchedEffect(sortByCode/*, TODO: isShowAll*/) {
         todoViewModel.getInitialTodoItems(sortByCode)
     }
+    val todos = todoViewModel.todoListState.value
 
     Column {
         Spacer(modifier = Modifier.height(16.dp))
-        val todos = todoViewModel.todoListState.value
 
         val interactionSource = remember { MutableInteractionSource() }
         Box(modifier = Modifier

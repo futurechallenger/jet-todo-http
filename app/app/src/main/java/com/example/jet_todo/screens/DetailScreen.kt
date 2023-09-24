@@ -12,20 +12,33 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.jet_todo.ui.theme.JettodoTheme
+import com.example.jet_todo.viewmodel.TodoViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen(navController: NavController? = null, todoId: Int? = null) {
+fun DetailScreen(
+    navController: NavController? = null,
+    todoId: Int? = null,
+    todoViewModel: TodoViewModel = hiltViewModel(),
+) {
+    LaunchedEffect(key1 = todoId) {
+        todoId?.let { todoViewModel.getTodoItem(it) }
+    }
+
+    val todoItemState = todoViewModel.todoState
+
     Scaffold(topBar = {
         TopAppBar(
             title = {
                 androidx.compose.material3.Text(
-                    text = "Todos > $todoId"
+                    text = "Todos > ${todoItemState.value?.title ?: ""}"
                 )
             },
             colors = TopAppBarDefaults.smallTopAppBarColors(
@@ -46,9 +59,8 @@ fun DetailScreen(navController: NavController? = null, todoId: Int? = null) {
                 modifier = Modifier.padding(8.dp),
                 text =
                 """
-                    This is an example of a scaffold. It uses the Scaffold composable's parameters to create a screen with a simple top app bar, bottom app bar, and floating action button.
-
-                    It also contains some basic inner content, such as this text.
+                    Here we got item: ${todoItemState.value?.title} \n
+                    with details: ${todoItemState.value?.description}
                 """.trimIndent(),
             )
         }
